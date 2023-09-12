@@ -1,0 +1,93 @@
+fetch(api + "/wp-json/api/branch")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        data.forEach((item, index) => {
+          if (index === 2) {
+            const title = document.createElement("h4");
+            title.innerHTML = "4RAU BARBER CUTCLUB";
+            title.style = "margin: 15px 0;";
+            document.getElementById("form-branch").appendChild(title);
+          }
+          const label = document.createElement("label");
+          label.setAttribute("for", `branch-${item.branch_id}`);
+          label.setAttribute("class", "form-branch-item");
+          if (index === 0) {
+            label.innerHTML = `
+        <input type="radio" id="branch-${item.branch_id}" class="form-branch-item-radio" checked/>
+        <span class="form-branch-item-title">${item.branch_name}</span>`;
+            document.getElementById("form-branch").appendChild(label);
+          } else {
+            label.innerHTML = `
+        <input type="radio" id="branch-${item.branch_id}" class="form-branch-item-radio"/>
+        <span class="form-branch-item-title">${item.branch_name}</span>`;
+            document.getElementById("form-branch").appendChild(label);
+          }
+          //Xu li khi chon chi nhanh
+          const labels = document.querySelectorAll(".form-branch-item");
+          labels.forEach((label) => {
+            label.addEventListener("click", function () {
+              labels.forEach((item) => {
+                item.querySelector("input").checked = false;
+              });
+              label.querySelector("input").checked = true;
+            });
+          });
+        });
+      });
+
+    //render nhom tho cat toc cua tung chi nhanh
+    document
+      .querySelector(".form-select-display")
+      .addEventListener("click", function () {
+        fetch("https://hospitable-egg.localsite.io" + "/wp-json/api/technician")
+          .then((res) => res.json())
+          .then((data) => {
+            let branch;
+            document.querySelectorAll(".form-branch-item").forEach((item) => {
+              if (item.querySelector("input").checked) {
+                branch = parseInt(item.getAttribute("for").split("branch-")[1]);
+              }
+            });
+            data.forEach((item) => {
+              if (item.branch_id == branch) {
+                console.log(branch);
+                console.log(item.branch_id);
+                const li = document.createElement("li");
+                li.setAttribute("class", "form-select-item");
+                li.setAttribute("id", `technician-${item.technician_id}`);
+                li.innerHTML = item.technician_name;
+                document.getElementById("technician-list").appendChild(li);
+              }
+            });
+          });
+        const wrapper = document.querySelector(".form-select-list-container");
+        if (wrapper.classList.contains("hidden")) {
+          wrapper.classList.remove("hidden");
+        } else {
+          wrapper.classList.add("hidden");
+        }
+      });
+    //render dich vu
+    fetch("https://hospitable-egg.localsite.io" + "/wp-json/api/service")
+      .then((res) => res.json())
+      .then((data) => {
+        data.forEach((item) => {});
+      });
+    // Xu li chon thoi diem
+    const timeLabels = document.querySelectorAll(".form-time-label");
+    timeLabels.forEach((timeLabel) => {
+      timeLabel.addEventListener("click", function () {
+        timeLabels.forEach((item) => {
+          item.classList.remove("time-checked");
+        });
+        timeLabel.classList.add("time-checked");
+        document.querySelectorAll(".form-time-radio").forEach((timeRadio) => {
+          if (timeRadio.getAttribute("id") === timeLabel.getAttribute("for")) {
+            timeRadio.checked = true;
+          } else {
+            timeRadio.checked = false;
+          }
+        });
+      });
+    });

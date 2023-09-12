@@ -1,0 +1,201 @@
+body{
+  background-color: #1b2638;
+  display: flex;
+  justify-content: center;
+}
+
+.app{
+  width: 700px;
+  align-self: center;
+  background-color: #231f20;
+  padding: 30px 24px;
+}
+
+*,
+ul {
+  padding: 0;
+  margin: 0;
+}
+
+input,
+fieldset,
+button {
+  border: none;
+  outline: none;
+  padding: 0;
+}
+
+fieldset {
+  width: 100%;
+}
+
+.star {
+  color: red;
+}
+
+#order-form {
+  width: 100%;
+  font-family: Montserrat, sans-serif;
+  font-size: 16px;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#order-form input[type="text"],
+#order-form input[type="text"]::placeholder,
+#order-form input[type="number"] {
+  width: 96%;
+  border-radius: 30px;
+  border: none;
+  margin-bottom: 15px;
+  height: 40px;
+  padding: 6.5px 11px;
+  outline: none;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+#order-form p {
+  font-size: 18px;
+  color: white;
+  font-weight: 700;
+}
+
+#order-form h4 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+}
+
+#order-form button {
+  background-color: #fff;
+  color: #000;
+  width: 100%; 
+  height: 40px;
+  border-radius: 30px;
+  padding: 10px;
+}
+
+.form-select-technician-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-select-display {
+  padding: 6.5px 11px;
+}
+
+#form-branch {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-branch-item {
+  width: 100%;
+  background-color: #fff;
+  color: black;
+  padding: 16px;
+  margin: 0 8px 12px 0;
+  cursor: pointer;
+}
+
+.form-branch-item-title {
+  font-weight: 700;
+}
+
+.form-select-technician-container {}
+
+.form-select-display {
+  position: relative;
+  display: flex;
+  width: 100%;
+  background-color: #fff;
+  color: #000;
+  justify-content: space-between;
+}
+
+.form-select-list-container {
+  position: absolute;
+  top: 50px;
+  background-color: #fff;
+  width: 100%;
+  left: 0;
+}
+
+.form-select-list {
+  list-style-type: none;
+}
+
+.form-input-technician-option-list {
+  color: #555;
+  font-size: 12px;
+  padding: 5px;
+}
+
+.form-select-item {
+  padding: 10px 20px;
+  color: #000;
+  cursor: pointer;
+}
+
+.form-select-item:hover {
+  background-color: #eee;
+}
+
+.form-service-container {
+  width: 100%;
+  display: flex;
+
+}
+
+#remove-service {
+  width: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#form-time-container {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#form-time-container label {
+  display: flex;
+  width: calc(25% - 9px);
+  background-color: #fff;
+  color: #000;
+  margin: 0 8px 8px 0;
+  height: 50px;
+  font-weight: 700;
+  border-radius: 15px;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+
+.form-time-radio {
+  display: none;
+}
+
+.form-time-label {
+  cursor: pointer;
+}
+
+.form-textarea {
+  height: 75px;
+  margin: 50px 0 30px 0;
+  padding: 4px 11px;
+}
+
+.time-checked {
+  background-color: #000 !important;
+  color: #fff !important;
+}
+
+.hidden {
+  display: none;
+}
