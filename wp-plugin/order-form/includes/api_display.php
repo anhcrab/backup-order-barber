@@ -23,12 +23,12 @@ function shop_data($request)
     }
     $serves = $wpdb->get_results("SELECT * FROM service_branch WHERE branch_id = '$branch_id'");
     foreach ($serves as $serve) {
-      array_push($services, $wpdb->get_results("SELECT * FROM services WHERE service_id = '{$serve->service_id}'"));
+      array_push($services, $wpdb->get_results("SELECT * FROM services WHERE service_id = '{$serve->service_id}'")[0]);
     }
     array_push($result, [
       'branch' => $branch,
       'technicians' => $techs,
-      'services' => $serves
+      'services' => $services
     ]);
   }
   return rest_ensure_response($result);

@@ -1,7 +1,7 @@
 <?php
 
-require_once(PLUGIN_ASPATH . '/api_store.php');
-require_once(PLUGIN_ASPATH . '/api_display.php');
+include_once PLUGIN_ASPATH . 'includes/api_store.php';
+include_once PLUGIN_ASPATH . 'includes/api_display.php';
 
 add_action('rest_api_init', function () {
   register_rest_route('api', '/', [

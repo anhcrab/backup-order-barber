@@ -24,4 +24,4 @@ function order_form_activate()
 }
 register_activation_hook(__FILE__, 'order_form_activate');
 
-require_once(PLUGIN_ASPATH . '/routes.php');
+include_once PLUGIN_ASPATH.'includes/includes.php';

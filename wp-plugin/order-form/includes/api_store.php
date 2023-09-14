@@ -2,44 +2,38 @@
 function store_form(WP_REST_Request $request)
 {
   global $wpdb;
-  $data = $request->get_body_params();
-  $phone = $data['phone'];
-  $name = $data['name'];
-  $guests = $data['guests'];
-  $branch = $data['branch'];
-  $technician = $data['technician'];
-  $service = $data['service'];
-  $date = $data['date'];
-  $time = $data['time'];
-  $note = $data['note'];
-  // Mẫu data gửi tới
-// form: {
-// phone: 123456789,
-// name: abcxyz,
-// guest: 2,
-// branch: quận 1, 123a bcd,
-// technician: Tuấn,
-// service: cắt + gội,
-// date: 12/06/2023,
-// time: 10:30,
-// note: abcbfsng
-// }
-  $wpdb->insert('order_form', [
-    'phone' => $phone,
-    'name' => $name,
-    'total_guest' => $guests,
-    'branch_id' => $wpdb->get_results("SELECT branches_id FROM branches WHERE branch_name = '$branch'")[0]->id,
-    'technician_id' => $wpdb->get_results("SELECT technician_id FROM technicians WHERE technician_name =
-'$technician'")[0]->id,
-    'service_id' => $wpdb->get_results("SELECT service_id FROM services WHERE service_name = '$service'")[0]->id,
-    'date' => $date,
-    'time' => $time,
-    'note' => $note
-  ]);
+  $data = json_decode($request->get_body());
+  $phone = $data->phone;
+  $name = $data->fullname;
+  $guests = $data->guests;
+  $branch_id = $data->branch_id;
+  $technician_id = $data->technician_id;
+  $service = $data->service;
+  $date = $data->date;
+  $time = $data->time;
+  $note = $data->note;
+  $total_price = $data->total_price;
+  $estimate_time = $data->estimate_time;
+
+
+  $wpdb->insert(
+    'order_form',
+    array(
+      'phone' => $phone,
+      'name' => $name,
+      'total_guest' => $guests,
+      'branch_id' => $branch_id,
+      'technician_id' => $technician_id,
+      'service' => $service,
+      'date' => $date,
+      'time' => $time,
+      'note' => $note,
+      'total_price' => $total_price,
+      'estimate_time' => $estimate_time,
+    )
+  );
   return rest_ensure_response($wpdb->insert_id);
 }
-
-
 
 function store_branch(WP_REST_Request $request)
 {
