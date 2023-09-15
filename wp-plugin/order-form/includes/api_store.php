@@ -80,7 +80,7 @@ function store_service(WP_REST_Request $request)
     'service_type' => $type,
     'service_name' => $name,
     'service_price' => $price,
-    'service_time' => $time
+    'service_time' => $time,
   ]);
   return rest_ensure_response($wpdb->insert_id);
 }
@@ -88,7 +88,7 @@ function store_service(WP_REST_Request $request)
 function store_service_branch(WP_REST_Request $request)
 {
   global $wpdb;
-  $data = json_decode($request->get_body_params());
+  $data = json_decode($request->get_body());
   $wpdb->insert('service_branch', [
     'service_id' => $data->service,
     'branch_id' => $data->branch,

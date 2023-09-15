@@ -28,15 +28,17 @@ export default function BranchService() {
   function handleSubmit(e) {
     e.preventDefault();
 
+    const payload = {
+      service: formService,
+      branch: formBranch
+    }
+    console.log(payload);
     fetch(baseURL + "/service-branch", {
       method: "POST",
       headers: {
         accept: "application/json",
       },
-      body: JSON.stringify({
-        services: formService,
-        branch: formBranch,
-      }),
+      body: JSON.stringify(payload),
     })
       .then((res) => {
         console.log(res.json());

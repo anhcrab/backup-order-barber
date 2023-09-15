@@ -17,7 +17,7 @@ function shop_data($request)
     $services = [];
     $branch_id = $branch->branch_id;
     foreach ($technicians as $tech) {
-      if ($tech->branch_id === $branch->branch_id) {
+      if ($tech->branch_id == $branch_id) {
         array_push($techs, $tech);
       }
     }

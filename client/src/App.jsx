@@ -3,8 +3,8 @@ import "./App.css";
 import Service from "./Service";
 
 function App() {
-  // const api = "https://baber.local";
-  const api = 'https://' + window.location.hostname
+  const api = "http://bolt-barber.local/";
+  // const api = window.location.protocol + '//' + window.location.hostname
   const [data, setData] = useState([]);
   const [techHidden, setTechHidden] = useState(true);
   const [services, setServices] = useState([]);
