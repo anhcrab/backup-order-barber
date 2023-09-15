@@ -1,0 +1,13 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.column{
+  border-right: 1px solid #333;
+  padding: 10px 0;
+  border-bottom: 1px solid #333;
+}
+
