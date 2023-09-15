@@ -19,7 +19,7 @@ function order_form_admin_template()
 
 function order_form_admin_index()
 {
-  require_once PLUGIN_ASPATH . 'admin/index.php';
+  require_once PLUGIN_ASPATH . 'admin/admin.php';
 }
 
 function order_form_display_link($links)

@@ -4,14 +4,6 @@ include_once PLUGIN_ASPATH . 'includes/api_store.php';
 include_once PLUGIN_ASPATH . 'includes/api_display.php';
 
 add_action('rest_api_init', function () {
-  register_rest_route('api', '/', [
-    'methods' => 'GET',
-    'callback' => function ($request) {
-      return rest_ensure_response('Đây là api routes');
-    },
-    'permission_callback' => '__return_true',
-  ]);
-
   register_rest_route('api', '/form', [
     'methods' => 'GET',
     'callback' => 'display_form',
