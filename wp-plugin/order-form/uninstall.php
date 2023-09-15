@@ -1,7 +1,7 @@
 <?php
 
 // if uninstall.php is not called by WordPress, die
-if (!defined('WP_UNINSTALL_PLUGIN')) {
+if (! defined('WP_UNINSTALL_PLUGIN')) {
     exit;
 }
 
@@ -14,7 +14,8 @@ delete_site_option($option_name);
 
 // drop a custom database table
 global $wpdb;
-$wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}order_form");
-$wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}technicians");
-$wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}branches");
-$wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}services");
+$wpdb->query("DROP TABLE IF EXISTS order_form");
+$wpdb->query("DROP TABLE IF EXISTS service_branch");
+$wpdb->query("DROP TABLE IF EXISTS technicians");
+$wpdb->query("DROP TABLE IF EXISTS branches");
+$wpdb->query("DROP TABLE IF EXISTS services");

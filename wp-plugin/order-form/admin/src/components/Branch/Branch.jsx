@@ -34,7 +34,7 @@ export default function Branch() {
           </tr>
         </thead>
         <tbody>
-          {typeof branches === Array.toString() &&
+          {branches &&
             branches.map((branch) => {
               return (
                 <>

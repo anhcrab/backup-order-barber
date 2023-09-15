@@ -10,6 +10,7 @@ import BranchService from "./pages/BranchService";
 export const context = createContext();
 function App() {
   const [page, setPage] = useState("Order");
+  console.log(window.location.protocol);
   const renderPage = () => {
     if (page === "Order") {
       return <OrderPage />;

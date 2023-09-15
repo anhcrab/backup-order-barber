@@ -56,7 +56,7 @@ export default function BranchService() {
             }}
           >
             <option value={null} style={{ display: 'none' }}>Chọn chi nhánh</option>
-            {typeof branches === Array.toString() &&
+            {branches &&
               branches.map((branch, index) => {
                 return (
                   <option key={index} value={branch.branch_id}>
@@ -72,7 +72,7 @@ export default function BranchService() {
             }}
           >
             <option value={null} style={{ display: 'none' }}>Chọn dịch vụ</option>
-            {typeof services === Array.toString() &&
+            {services &&
               services.map((service, index) => {
                 return (
                   <option key={index} value={service.service_id}>

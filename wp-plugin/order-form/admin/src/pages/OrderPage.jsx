@@ -71,7 +71,7 @@ export default function OrderPage() {
           </tr>
         </thead>
         <tbody>
-          {typeof orders === Array.toString() &&
+          {orders &&
             orders.map((order) => {
               return (
                 <>

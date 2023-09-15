@@ -15,10 +15,11 @@ export default function Form(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
+    console.log(form);
     fetch(baseURL + "/" + URLEndpoint, {
       method: "POST",
       headers: {
-        Accept: "Application/json",
+        'Content-Type': "Application/json",
       },
       body: JSON.stringify(form),
     })
@@ -35,7 +36,24 @@ export default function Form(props) {
       <h2 style={{ paddingBottom: "12px" }}>{title}</h2>
 
       <div style={{ display: "flex", justifyContent: "center" }}>
-        <form onSubmit={handleSubmit} className="form-container">
+        <form onSubmit={e => {
+          e.preventDefault();
+          console.log(form);
+          fetch(baseURL + "/" + URLEndpoint, {
+            method: "POST",
+            headers: {
+              'accept': "application/json",
+              'content-type': 'application/json'
+            },
+            body: JSON.stringify(form),
+          })
+            .then((res) => res.json())
+            .then((res) => {
+              console.log(res);
+              state("table");
+            })
+            .catch((err) => console.log(err));
+        }} className="form-container">
           {data.map((item) => {
             return (
               <>

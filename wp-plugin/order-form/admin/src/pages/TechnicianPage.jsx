@@ -34,7 +34,7 @@ export default function TechnicianPage() {
               name: "technician_name",
             },
             {
-              type: "text",
+              type: "number",
               placeholder: "Thuộc chi nhánh",
               name: "branch_id",
             },

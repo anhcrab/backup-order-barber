@@ -39,7 +39,7 @@ export default function Technician() {
           </tr>
         </thead>
         <tbody>
-          {typeof technicians === Array.toString() &&
+          {technicians &&
             technicians.map((tech) => {
               return (
                 <>

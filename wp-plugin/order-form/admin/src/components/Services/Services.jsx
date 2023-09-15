@@ -41,7 +41,7 @@ export default function Services() {
           </tr>
         </thead>
         <tbody>
-          {typeof services === Array.toString() &&
+          {services &&
             services.map((service) => {
               return (
                 <>
