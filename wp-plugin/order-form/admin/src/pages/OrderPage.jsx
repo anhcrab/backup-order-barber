@@ -1,5 +1,44 @@
+import { useEffect, useState } from "react";
+import { baseURL } from "../utils/api";
 
 export default function OrderPage() {
+  const [orders, setOrders] = useState([]);
+  const [branches, setBranches] = useState([]);
+  const [technicians, setTechnicians] = useState([]);
+  const [services, setServices] = useState([]);
+
+  useEffect(() => {
+    console.log(baseURL);
+    fetch(baseURL + "/form").then(res => res.json()).then((res) => {
+      setOrders(res);
+    });
+    fetch(baseURL + "/branch").then(res => res.json()).then((res) => {
+      setBranches(res);
+    });
+    fetch(baseURL + "/technician").then(res => res.json()).then((res) => {
+      setTechnicians(res);
+    });
+    fetch(baseURL + "/service").then(res => res.json()).then((res) => {
+      setServices(res);
+    });
+  }, []);
+
+  useEffect(() => {
+    console.log(orders);
+  }, [orders])
+
+  useEffect(() => {
+    console.log(branches);
+  }, [branches]);
+
+  useEffect(() => {
+    console.log(technicians);
+  }, [technicians]);
+
+  useEffect(() => {
+    console.log(services);
+  }, [services]);
+
   return (
     <>
       <h2>Order Table</h2>
@@ -13,7 +52,9 @@ export default function OrderPage() {
           }}
         >
           <tr className="table100-head">
-            <th className="column" style={{ borderTopLeftRadius: "10px" }}>ID</th>
+            <th className="column" style={{ borderTopLeftRadius: "10px" }}>
+              ID
+            </th>
             <th className="column">Số điện thoại</th>
             <th className="column">Họ và tên</th>
             <th className="column">Số lượng khách</th>
@@ -30,34 +71,51 @@ export default function OrderPage() {
           </tr>
         </thead>
         <tbody>
-          <tr className="table100-body">
-            <th className="column" style={{borderLeft: "1px solid #333"}}>123</th>
-            <th className="column">1324561200</th>
-            <th className="column">Thinh</th>
-            <th className="column">10</th>
-            <th className="column">Quan 1</th>
-            <th className="column">Long</th>
-            <th className="column">Uon toc</th>
-            <th className="column">12/10/2023</th>
-            <th className="column">11:30 </th>
-            <th className="column">Uon cang cong cang tot</th>
-            <th className="column">free</th>
-            <th className="column">5 phut</th>
-          </tr>
-          <tr className="table100-body">
-            <th className="column" style={{borderLeft: "1px solid #333"}}>145</th>
-            <th className="column">1324561200</th>
-            <th className="column">Thinh</th>
-            <th className="column">10</th>
-            <th className="column">Quan 1</th>
-            <th className="column">Long</th>
-            <th className="column">Uon toc</th>
-            <th className="column">12/10/2023</th>
-            <th className="column">11:30 </th>
-            <th className="column">Uon cang cong cang tot</th>
-            <th className="column">free</th>
-            <th className="column">5 phut</th>
-          </tr>
+          {typeof orders === Array.toString() &&
+            orders.map((order) => {
+              return (
+                <>
+                  <tr className="table100-body">
+                    <th
+                      className="column"
+                      style={{ borderLeft: "1px solid #333" }}
+                    >
+                      {order.id}
+                    </th>
+                    <th className="column">{order.phone}</th>
+                    <th className="column">{order.name}</th>
+                    <th className="column">{order.total_guest}</th>
+                    <th className="column">
+                      {branches &&
+                        branches.find(
+                          (branch) => branch.branch_id === order.branch_id
+                        ).branch_name}
+                    </th>
+                    <th className="column">
+                      {technicians &&
+                        technicians.find(
+                          (tech) => tech.technician_id === order.technician_id
+                        ).technician_name}
+                    </th>
+                    <th className="column">
+                      {JSON.parse(order.service).map((service, index) => {
+                        return (
+                          service.service_name +
+                          (JSON.parse(order.service).length - 1 === index
+                            ? ""
+                            : " | ")
+                        );
+                      })}
+                    </th>
+                    <th className="column">{order.date}</th>
+                    <th className="column">{order.time}</th>
+                    <th className="column">{order.note}</th>
+                    <th className="column">{order.total_price}</th>
+                    <th className="column">{order.estimate_time}</th>
+                  </tr>
+                </>
+              );
+            })}
         </tbody>
       </table>
     </>

@@ -25,8 +25,9 @@ export default function BranchPage() {
         <Branch />
       ) : (
         <Form
-          state = {setState}
+          state={setState}
           title="Thêm chi nhánh"
+          URLEndpoint='branch'
           data={[
             {
               type: "text",

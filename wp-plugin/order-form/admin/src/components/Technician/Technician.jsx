@@ -1,10 +1,25 @@
+import { useEffect, useState } from "react";
 import "./Technician.scss";
+import { baseURL } from "../../utils/api";
 
 export default function Technician() {
+  const [technicians, setTechnicians] = useState([]);
+
+  useEffect(() => {
+    fetch(baseURL + "/technician")
+      .then((res) => res.json())
+      .then((data) => {
+        setTechnicians(data);
+      });
+  }, []);
+
+  useEffect(() => {
+    console.log(technicians);
+  }, [technicians]);
+
   return (
     <>
       <h2>Technician</h2>
-
       <table style={{ width: "100%", borderSpacing: 0 }}>
         <thead
           style={{
@@ -24,20 +39,23 @@ export default function Technician() {
           </tr>
         </thead>
         <tbody>
-          <tr className="table100-body">
-            <th className="column" style={{ borderLeft: "1px solid #333" }}>
-              123
-            </th>
-            <th className="column">1324561200</th>
-            <th className="column">1324561200</th>
-          </tr>
-          <tr className="table100-body">
-            <th className="column" style={{ borderLeft: "1px solid #333" }}>
-              145
-            </th>
-            <th className="column">1324561200</th>
-            <th className="column">1324561200</th>
-          </tr>
+          {typeof technicians === Array.toString() &&
+            technicians.map((tech) => {
+              return (
+                <>
+                  <tr className="table100-body">
+                    <th
+                      className="column"
+                      style={{ borderLeft: "1px solid #333" }}
+                    >
+                      {tech.technician_id}
+                    </th>
+                    <th className="column">{tech.technician_name}</th>
+                    <th className="column">{tech.branch_id}</th>
+                  </tr>
+                </>
+              );
+            })}
         </tbody>
       </table>
     </>

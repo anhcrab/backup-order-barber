@@ -1,10 +1,25 @@
+import { useEffect, useState } from "react";
 import "./Services.scss";
+import { baseURL } from "../../utils/api";
 
 export default function Services() {
+  const [services, setServices] = useState([]);
+
+  useEffect(() => {
+    fetch(baseURL + "/service")
+      .then((res) => res.json())
+      .then((data) => {
+        setServices(data);
+      });
+  }, []);
+
+  useEffect(() => {
+    console.log(services);
+  }, [services]);
+
   return (
     <>
       <h2>Service</h2>
-
       <table style={{ width: "100%", borderSpacing: 0 }}>
         <thead
           style={{
@@ -26,24 +41,25 @@ export default function Services() {
           </tr>
         </thead>
         <tbody>
-          <tr className="table100-body">
-            <th className="column" style={{ borderLeft: "1px solid #333" }}>
-              123
-            </th>
-            <th className="column">1324561200</th>
-            <th className="column">Thinh</th>
-            <th className="column">333</th>
-            <th className="column">10</th>
-          </tr>
-          <tr className="table100-body">
-            <th className="column" style={{ borderLeft: "1px solid #333" }}>
-              145
-            </th>
-            <th className="column">1324561200</th>
-            <th className="column">Thinh</th>
-            <th className="column">666</th>
-            <th className="column">10</th>
-          </tr>
+          {typeof services === Array.toString() &&
+            services.map((service) => {
+              return (
+                <>
+                  <tr className="table100-body">
+                    <th
+                      className="column"
+                      style={{ borderLeft: "1px solid #333" }}
+                    >
+                      {service.service_id}
+                    </th>
+                    <th className="column">{service.service_name}</th>
+                    <th className="column">{service.service_type}</th>
+                    <th className="column">{service.service_time}</th>
+                    <th className="column">{service.service_price}</th>
+                  </tr>
+                </>
+              );
+            })}
         </tbody>
       </table>
     </>

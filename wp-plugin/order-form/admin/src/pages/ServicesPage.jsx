@@ -24,8 +24,9 @@ export default function ServicesPage() {
         <Services />
       ) : (
         <Form
-          title = "Thêm dịch vụ"
-          state = {setState}
+          title="Thêm dịch vụ"
+          state={setState}
+          URLEndpoint='service'
           data={[
             {
               type: "text",

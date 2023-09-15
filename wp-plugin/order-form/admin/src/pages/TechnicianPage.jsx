@@ -26,6 +26,7 @@ export default function TechnicianPage() {
         <Form
           state={setState}
           title="Thêm thợ"
+          URLEndpoint='technician'
           data={[
             {
               type: "text",

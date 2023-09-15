@@ -1,8 +1,9 @@
 import { useState } from "react";
 import "./Form.scss";
+import { baseURL } from "../../utils/api";
 
 export default function Form(props) {
-  const data = props.data;
+  const { data, URLEndpoint, state, title } = props;
   const [form, setForm] = useState({});
 
   function handleOnChange(e) {
@@ -14,24 +15,26 @@ export default function Form(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    fetch("https://"+ window.location.hostname +"/wp-json/api/branch",{
-        method: "POST",
-        headers: {
-            "accept": "application/json"
-        },
-        body: JSON.stringify(form)
-    }).then(res => {
-        console.log(res.json());
-    }).then((res) => {
-      props.state("table")
-    }).catch(err => console.log(err))
+    fetch(baseURL + "/" + URLEndpoint, {
+      method: "POST",
+      headers: {
+        Accept: "Application/json",
+      },
+      body: JSON.stringify(form),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+        state("table");
+      })
+      .catch((err) => console.log(err));
   }
 
   return (
     <>
-      <h2 style={{ paddingBottom: "12px" }}>{props.title}</h2>
+      <h2 style={{ paddingBottom: "12px" }}>{title}</h2>
 
-      <div style={{display:"flex", justifyContent:"center"}}>
+      <div style={{ display: "flex", justifyContent: "center" }}>
         <form onSubmit={handleSubmit} className="form-container">
           {data.map((item) => {
             return (
@@ -46,7 +49,9 @@ export default function Form(props) {
               </>
             );
           })}
-          <button type="submit" className="form-button">Thêm</button>
+          <button type="submit" className="form-button">
+            Thêm
+          </button>
         </form>
       </div>
     </>
