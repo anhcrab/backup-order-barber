@@ -9,23 +9,31 @@ export default function OrderPage() {
 
   useEffect(() => {
     console.log(baseURL);
-    fetch(baseURL + "/form").then(res => res.json()).then((res) => {
-      setOrders(res);
-    });
-    fetch(baseURL + "/branch").then(res => res.json()).then((res) => {
-      setBranches(res);
-    });
-    fetch(baseURL + "/technician").then(res => res.json()).then((res) => {
-      setTechnicians(res);
-    });
-    fetch(baseURL + "/service").then(res => res.json()).then((res) => {
-      setServices(res);
-    });
+    fetch(baseURL + "/form")
+      .then((res) => res.json())
+      .then((res) => {
+        setOrders(res);
+      });
+    fetch(baseURL + "/branch")
+      .then((res) => res.json())
+      .then((res) => {
+        setBranches(res);
+      });
+    fetch(baseURL + "/technician")
+      .then((res) => res.json())
+      .then((res) => {
+        setTechnicians(res);
+      });
+    fetch(baseURL + "/service")
+      .then((res) => res.json())
+      .then((res) => {
+        setServices(res);
+      });
   }, []);
 
   useEffect(() => {
     console.log(orders);
-  }, [orders])
+  }, [orders]);
 
   useEffect(() => {
     console.log(branches);
@@ -86,16 +94,18 @@ export default function OrderPage() {
                     <th className="column">{order.name}</th>
                     <th className="column">{order.total_guest}</th>
                     <th className="column">
-                      {branches &&
-                        branches.find(
-                          (branch) => branch.branch_id === order.branch_id
-                        ).branch_name}
+                      {branches.map((branch) => {
+                        if (order.branch_id == branch.branch_id) {
+                          return branch.branch_name;
+                        }
+                      })}
                     </th>
                     <th className="column">
-                      {technicians &&
-                        technicians.find(
-                          (tech) => tech.technician_id === order.technician_id
-                        ).technician_name}
+                      {technicians.map((tech) => {
+                        if (order.technician_id == tech.technician_id) {
+                          return tech.technician_name;
+                        }
+                      })}
                     </th>
                     <th className="column">
                       {JSON.parse(order.service).map((service, index) => {

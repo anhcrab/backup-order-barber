@@ -25,11 +25,11 @@ function order_form_activate()
   // Tạo bảng technicians
   $wpdb->query('CREATE TABLE technicians (technician_id INT AUTO_INCREMENT, technician_name VARCHAR(255) NULL, branch_id INT NOT NULL, PRIMARY KEY (technician_id), FOREIGN KEY (branch_id) REFERENCES branches(branch_id));');
 
+  // Tạo bảng order_form
+  $wpdb->query('CREATE TABLE order_form (id INT AUTO_INCREMENT, phone VARCHAR(15) NULL, name VARCHAR(255) NULL, total_guest INT NULL, branch_id INT NOT NULL, technician_id INT NOT NULL, service TEXT NULL, date VARCHAR(100) NULL, time VARCHAR(6) NULL, note TEXT NULL, total_price BIGINT NULL, estimate_time VARCHAR(255) NULL, PRIMARY KEY (id), FOREIGN KEY (branch_id) REFERENCES branches(branch_id), FOREIGN KEY (technician_id) REFERENCES technicians(technician_id));');
+
   // Tạo bảng service_branch
   $wpdb->query('CREATE TABLE service_branch (service_id INT NOT NULL, branch_id INT NOT NULL, FOREIGN KEY (service_id) REFERENCES services(service_id), FOREIGN KEY (branch_id) REFERENCES branches(branch_id));');
-
-  // Tạo bảng order_form
-  $wpdb->query('CREATE TABLE order_form (id INT AUTO_INCREMENT, phone VARCHAR(15) NULL, name VARCHAR(255) NULL, total_guest INT NULL, branch_id INT NOT NULL, technician_id INT NOT NULL, service TEXT NULL, date VARCHAR(100) NULL, time VARCHAR(6) NULL, note TEXT NULL, total_price BIGINT NULL, estimate_time VARCHAR(255) NULL, PRIMARY KEY (id));');
 }
 
 register_activation_hook(__FILE__, 'order_form_activate');
